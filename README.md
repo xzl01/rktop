@@ -1,5 +1,6 @@
 # rktop
-一个轻量级的 Bash Shell 脚本，用于实时监控基于 Rockchip 芯片（特别是 RK3588 系列）的开发板硬件状态。
+一个轻量级的 Bash Shell 脚本，即下载即用，用于实时监控基于 Rockchip 芯片（特别是 RK3588 系列）的开发板硬件状态喵。
+是叶姐姐🍃在Rockchip平台调试Focus-Finder项目时用氛围编程写的。
 
 ## ✨ 功能特性
 
@@ -13,14 +14,39 @@
 - **自动提权**：脚本会自动请求 `sudo` 权限以读取底层硬件信息。
 - **纯净界面**：基于 TUI (Text User Interface)，无图形界面依赖。
 
-## 📸 截图示例
+## 📸 效果预览
+  ```text
+  Rockchip Monitor (Refresh: 0.5s)             Time: 11:45:14
+  --------------------
+  CPU Status:
+  CPU0  : [||||||||||||            ]  45% @ 1.800 GHz    CPU4  : [||||||||||              ]  38% @ 2.200 GHz
+  CPU1  : [||||||||||              ]  38% @ 1.800 GHz    CPU5  : [||||||||||              ]  38% @ 2.200 GHz
+  CPU2  : [||||||||||||||          ]  52% @ 1.800 GHz    CPU6  : [|||||                   ]  20% @ 2.200 GHz
+  CPU3  : [|||||                   ]  20% @ 1.800 GHz    CPU7  : [||||||||||||            ]  45% @ 2.200 GHz
+  SOC temperature: +42.0°C 
+  Little cores temperature: +40.0°C 
+  Big core0 temperature: +45.0°C    Big core1 temperature: +46.0°C 
+  
+  NPU Status:
+  Core0: [|||||||||||||||||||||||| ]  92% @ 1.00 GHz
+  Core1: [||||||||                 ]  30% @ 1.00 GHz
+  Core2: [                         ]   0% @ 0.00 GHz
+  NPU temperature: +48.0°C 
+  
+  GPU Status:
+  Util : [||||||||                 ]  28% @ 0.30 GHz
+  GPU temperature: +44.0°C
 
-*(建议在使用时截图并替换此处)*
-![Demo](./screenshot.png)
+  RAG Status:
+  RAG3_0: [                         ]   0% @ 0.75 GHz
+  RAG3_1: [                         ]   0% @ 0.75 GHz
+  RAG2:   [                         ]   0% @ 0.75 GHz
+  --------------------
+  ```
 
 ## 📋 系统要求
 
-- **硬件**: 基于 Rockchip SoC 的开发板或设备 (如 Orange Pi 5, Radxa Rock 5, NanoPi 等)。
+- **硬件**: 基于 Rockchip SoC 的开发板或设备 (如 Orange Pi 5, Radxa Rock 5 等)。
 - **系统**: Linux (ARM64 架构)。
 - **权限**: 需要 Root 权限 (脚本会自动请求)。
 - **依赖**:
@@ -29,9 +55,12 @@
 
 ## 🚀 使用方法
 
-1. **下载脚本**
+1. **下载脚本以及安装传感器库**
    ```bash
    wget clone https://github.com/YeWenxuan64/rktop/rktop.sh
+
+   sudo apt update
+   sudo apt install lm-sensors
    ```
 
 2. **赋予执行权限**
@@ -47,14 +76,21 @@
    ```
    
 5. **输入root密码**
-   由于查询使用率/频率时，需要查询部分系统的文件，所以不得不以sudo运行捏
+  由于查询使用率/频率时，需要查询部分系统的文件，所以不得不以sudo运行捏~
 
 6. **退出**
-   按 Ctrl + C 退出
+  按 Ctrl + C 退出
 
 ## ⚙️ 配置说明
-  在脚本头部可以修改以下变量以适应不同环境：
+  你可以直接修改脚本头部的变量来调整显示效果：
+  ```bash
+  # 进度条宽度
+  BAR_WIDTH=25
   
-  变量名	默认值	说明
-  REFRESH_TIME	0.5	刷新间隔 (秒)
-  BAR_WIDTH	25	进度条宽度
+  # 刷新时间 (秒)
+  REFRESH_TIME=0.5
+  ```
+
+## 📝 许可证
+本项目采用 MIT 许可证。
+欢迎 Issue 和 Pull Request。
