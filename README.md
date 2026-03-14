@@ -1,5 +1,5 @@
 # rktop
-一个轻量级的 Bash Shell 脚本，即下载即用，用于实时监控基于 Rockchip 芯片（特别是 RK3588 系列）的开发板硬件状态喵。
+一个轻量级的 Bash Shell 脚本，即下载即用，用于实时监控基于 Rockchip 芯片（特别是 RK3588 系列）的开发板硬件状态喵。<br>
 是叶姐姐🍃在Rockchip平台调试Focus-Finder项目时用氛围编程写的。
 
 ## ✨ 功能特性
@@ -75,10 +75,10 @@
    # 或 sudo ./rktop.sh
    ```
    
-5. **输入root密码**
+5. **输入root密码**<br>
   由于查询使用率/频率时，需要查询部分系统的文件，所以不得不以sudo运行捏~
 
-6. **退出**
+6. **退出**<br>
   按 Ctrl + C 退出
 
 ## ⚙️ 配置说明
@@ -89,6 +89,36 @@
   
   # 刷新时间 (秒)
   REFRESH_TIME=0.5
+  ```
+
+## 🔧关键查询命令
+  ```bash
+  #CPU load (需要根据时间计算)
+  $ cat /proc/stat
+
+  #CPU freq
+  $ cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq (or cpu1, cpu2 etc)
+
+  #GPU load
+  $ cat /sys/class/devfreq/fb000000.gpu/load
+
+  #GPU freq
+  $ cat /sys/class/devfreq/fb000000.gpu/cur_freq
+
+  #NPU load
+  $ sudo cat /sys/kernel/debug/rknpu/load
+
+  #NPU freq
+  $ cat /sys/class/devfreq/fdab0000.npu/cur_freq
+
+  #RGA load
+  $ sudo cat /sys/kernel/debug/rkrga/load
+
+  #RGA freq (需要挑选(虽然小女子也不知道选哪一个, 就随便选了三个))
+  $ sudo cat /sys/kernel/debug/clk/clk_summary | grep rga
+
+  #TEMP
+  $ sensors
   ```
 
 ## 📝 许可证
