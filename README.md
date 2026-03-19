@@ -57,7 +57,7 @@
 
 1. **下载脚本以及安装传感器库**
    ```bash
-   wget clone https://github.com/YeWenxuan64/rktop/rktop.sh
+   wget https://github.com/YeWenxuan64/rktop/rktop.sh
 
    sudo apt update
    sudo apt install lm-sensors
